@@ -18,7 +18,17 @@ module front_PTFE()
         translate([3+(i*14),-2,4]) rotate([90,0,0]) cylinder(r1=2,r2=1.1, h=5, $fn=50); 
     }
 }
-
+module front_PFTE_holder_tubes()
+{r=75;
+    for (i=[9:14:r*(n/5)-r+23])
+                {
+                    translate([i,-14,-1.5]) rotate([90,0,0]) cylinder(r=1.65, h=20, $fn=50); 
+                    translate([i-2.8,-18,-1.5-2.9]) cube([5.6,2,19]);
+                    
+                    translate([i+28,-14,-1.5]) rotate([90,0,0]) cylinder(r=1.65, h=20, $fn=50); 
+                    translate([i-2.8+28,-18,-1.5-2.9]) cube([5.6,2,19]);
+                }
+            }
 module rear_PTFE()
 {
     for (i =[0:n-1])
@@ -32,6 +42,18 @@ module rear_PTFE()
         translate([2+(i*14),4.5,4]) cube([2,4,10]); 
     }
 }
+module rear_PFTE_holder_tubes()
+{r=75;
+    for (i=[9:14:r*(n/5)-r+52])
+                {
+                    translate([i,14,-30]) rotate([-20,0,0]) cylinder(r=1.7, h=36, $fn=50); 
+                    
+                    translate([i,14,-30]) rotate([-20,0,0]) cylinder(r=3.1, h=31, $fn=6); 
+                    translate([i,14,-30]) rotate([-20,0,0]) cylinder(r=3.6, h=28, $fn=6); 
+                    translate([i,14,-30]) rotate([-20,0,0]) cylinder(r1=4, r2=3.1, h=22, $fn=6); 
+                    translate([i,23.1,-5]) rotate([-20,0,0]) cylinder(r1=3.6, r2=3.1, h=3, $fn=6); 
+                }
+    }
 
 
 module selector_screws_and_opening(x){
@@ -169,26 +191,10 @@ module pulley_body()
             
             
             // rear PTFE tubes holder screws
-            for (i =[10:14:52])
-                {
-                    translate([i,14,-30]) rotate([-20,0,0]) cylinder(r=1.7, h=36, $fn=50); 
-                    
-                    translate([i,14,-30]) rotate([-20,0,0]) cylinder(r=3.1, h=31, $fn=6); 
-                    translate([i,14,-30]) rotate([-20,0,0]) cylinder(r=3.6, h=28, $fn=6); 
-                    translate([i,14,-30]) rotate([-20,0,0]) cylinder(r1=4, r2=3.1, h=22, $fn=6); 
-                    translate([i,23.1,-5]) rotate([-20,0,0]) cylinder(r1=3.6, r2=3.1, h=3, $fn=6); 
-                }
+            rear_PFTE_holder_tubes()
 
             // front PTFE tubes holder screws           
-            for (i=[9:14:23])
-                {
-                    translate([i,-14,-1.5]) rotate([90,0,0]) cylinder(r=1.65, h=20, $fn=50); 
-                    translate([i-2.8,-18,-1.5-2.9]) cube([5.6,2,19]);
-                    
-                    translate([i+28,-14,-1.5]) rotate([90,0,0]) cylinder(r=1.65, h=20, $fn=50); 
-                    translate([i-2.8+28,-18,-1.5-2.9]) cube([5.6,2,19]);
-                }
-            
+            front_PFTE_holder_tubes();
             // front corners
             translate([-29,-68,-35]) rotate([45,0,0]) cube([130,10,20]);
             translate([-29,-73,12]) rotate([45,0,0]) cube([130,20,10]);
@@ -283,6 +289,8 @@ module pulley_body()
 }
 
 
-//pulley_body();
+pulley_body();
 //selector_screws_and_opening(71);
-body();
+//body();
+//front_PFTE_holder_tubes();
+//rear_PFTE_holder_tubes();
