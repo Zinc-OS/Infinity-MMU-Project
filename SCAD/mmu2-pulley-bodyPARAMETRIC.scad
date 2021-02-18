@@ -34,7 +34,24 @@ module rear_PTFE()
 }
 
 
+module selector_screws_and_opening(x){
+    translate([(n/5)*x,0,0]){
+            translate([93-x,-48,-3]) rotate([0,90,0]) cylinder(r=11.5, h=5, $fn=50); 
+            translate([93-x,-48,5]) rotate([0,90,0]) cylinder(r=4, h=5, $fn=50); 
+            translate([85-x,-48,-3]) rotate([0,90,0]) cylinder(r=8, h=15, $fn=50); 
+            translate([85-x,-48,1.5]) rotate([0,90,0]) cylinder(r=4, h=15, $fn=50); 
+            translate([91-x,-48-15.5,-3-15.5]) rotate([0,90,0]) cylinder(r=1.65, h=10, $fn=50); 
+            translate([91-x,-48-15.5,-3+15.5]) rotate([0,90,0]) cylinder(r=1.65, h=10, $fn=50); 
+            translate([91-x,-48+15.5,-3+15.5]) rotate([0,90,0]) cylinder(r=1.65, h=10, $fn=50); 
+            translate([81-x,-48-15.5,-3-15.5]) rotate([0,90,0]) cylinder(r=3.1, h=10, $fn=50); 
+            translate([81-x,-48-15.5,-3+15.5]) rotate([0,90,0]) cylinder(r=3.1, h=10, $fn=50); 
+            translate([81-x,-48+15.5,-3+15.5]) rotate([0,90,0]) cylinder(r=3.1, h=10, $fn=50); 
 
+            translate([85-x,-48-10,-3]) rotate([0,90,0]) cylinder(r=4, h=5, $fn=50); 
+            translate([85-x,-48+10,-3]) rotate([0,90,0]) cylinder(r=4, h=5, $fn=50); 
+            translate([85-x,-48-10,-7]) cube([5,20,8]); 
+    }
+}
 module pulley_body()
 {
 
@@ -217,20 +234,8 @@ module pulley_body()
             
 
             // selector motor screws and opening
-            translate([93,-48,-3]) rotate([0,90,0]) cylinder(r=11.5, h=5, $fn=50); 
-            translate([93,-48,5]) rotate([0,90,0]) cylinder(r=4, h=5, $fn=50); 
-            translate([85,-48,-3]) rotate([0,90,0]) cylinder(r=8, h=15, $fn=50); 
-            translate([85,-48,1.5]) rotate([0,90,0]) cylinder(r=4, h=15, $fn=50); 
-            translate([91,-48-15.5,-3-15.5]) rotate([0,90,0]) cylinder(r=1.65, h=10, $fn=50); 
-            translate([91,-48-15.5,-3+15.5]) rotate([0,90,0]) cylinder(r=1.65, h=10, $fn=50); 
-            translate([91,-48+15.5,-3+15.5]) rotate([0,90,0]) cylinder(r=1.65, h=10, $fn=50); 
-            translate([81,-48-15.5,-3-15.5]) rotate([0,90,0]) cylinder(r=3.1, h=10, $fn=50); 
-            translate([81,-48-15.5,-3+15.5]) rotate([0,90,0]) cylinder(r=3.1, h=10, $fn=50); 
-            translate([81,-48+15.5,-3+15.5]) rotate([0,90,0]) cylinder(r=3.1, h=10, $fn=50); 
-
-            translate([(n/5)*85,-48-10,-3]) rotate([0,90,0]) cylinder(r=4, h=5, $fn=50); 
-            translate([(n/5)*85,-48+10,-3]) rotate([0,90,0]) cylinder(r=4, h=5, $fn=50); 
-            translate([(n/5)*85,-48-10,-7]) cube([5,20,8]); 
+            selector_screws_and_opening(71);
+            
             
             // frame holders
             
@@ -274,4 +279,6 @@ module pulley_body()
 }
 
 
-pulley_body();
+//pulley_body();
+//selector_screws_and_opening(71);
+
