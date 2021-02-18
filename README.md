@@ -17,4 +17,4 @@ This repository contains SCAD files and STLs of the printed parts.
 
 ##Image
 
-https://raw.githubusercontent.com/Zinc-OS/Infinity-MMU-Project/MMU2/anim.gif
+![alt text](https://raw.githubusercontent.com/Zinc-OS/Infinity-MMU-Project/MMU2/anim.gif)
