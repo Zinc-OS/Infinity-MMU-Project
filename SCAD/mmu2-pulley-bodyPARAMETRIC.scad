@@ -50,8 +50,8 @@ module pulley_body()
                
                difference()
                 {
-                    translate([-5,-5,-24]) cube([72,41,31]);
-                    translate([-15,40,-0]) rotate([45,0,0]) cube([90,41,31]);
+                    translate([-5,-5,-24]) cube([(n/5)*72,41,31]);
+                    translate([-15,40,-0]) rotate([45,0,0]) cube([(n/5)*90,41,31]);
                 }
                translate([(n/5)*86,-69,-24]) cube([10,90,45]);
                translate([-27,-69,-24]) cube([10,90,26]);
@@ -95,9 +95,9 @@ module pulley_body()
             translate([-2,28,0]) cube([65,4,10]);
             
             // selector shafts
-            translate([-28,-48,-3]) rotate([0,90,0]) cylinder(r=4.3, h=130, $fn=50); 
-            translate([-26,-48,16]) rotate([0,90,0]) cylinder(r=2.7, h=130, $fn=50); 
-            translate([-26,-48,-19]) rotate([0,90,0]) cylinder(r=2.6, h=130, $fn=50); 
+            translate([-28,-48,-3]) rotate([0,90,0]) cylinder(r=4.3, h=(n/5)*130, $fn=50); 
+            translate([-26,-48,16]) rotate([0,90,0]) cylinder(r=2.7, h=(n/5)*130, $fn=50); 
+            translate([-26,-48,-19]) rotate([0,90,0]) cylinder(r=2.6, h=(n/5)*130, $fn=50); 
             translate([-19,-48,16]) rotate([0,90,0]) cylinder(r1=2.65, r2=3,h=3, $fn=50); 
             translate([-19,-48,-19]) rotate([0,90,0]) cylinder(r1=2.6, r2=3, h=3, $fn=50); 
             translate([(n/5)*94,-48,16]) rotate([0,90,0]) cylinder(r1=2.65, r2=3,h=3, $fn=50); 
@@ -115,9 +115,9 @@ module pulley_body()
             translate([-2,15,5]) rotate([-10,0,0]) cube([65,30,10]);
             
             // pulley space
-            translate([-7,0,0]) rotate([0,90,0]) cylinder(r=5, h=71, $fn=50); 
+            translate([-7,0,0]) rotate([0,90,0]) cylinder(r=5, h=(n/5)*71, $fn=50); 
             translate([-7,-5,0]) cube([71,10,10]);
-            translate([-7,0,24.5]) rotate([0,90,0]) cylinder(r=21, h=71, $fn=50);     
+            translate([-7,0,24.5]) rotate([0,90,0]) cylinder(r=21, h=(n/5)*71, $fn=50);     
 
             // grub screws space
             for (i =[-6:14:50])
