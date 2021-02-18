@@ -5,7 +5,7 @@
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://prusamendel.org
 
-EXTRUDERS=10;
+EXTRUDERS=$t*10+4;
 n=EXTRUDERS;
 module front_PTFE()
 {
@@ -78,9 +78,11 @@ module body(){
     // body
         union()
             {
+                
                r=86;
+                
                // body 
-               translate([-18.5,-20,-24]) cube([(n/5)*r+114.5-r,41,31]);
+               translate([-18.5,-20,-24]) cube([(n/5)*r+114.5-r,41*(n/5),31]);
                translate([-27,-65,-25]) cube([(n/5)*r+123-r,92,1]);
                translate([-27,-65,-25]) cube([(n/5)*r+123-r,2,3]);
                
@@ -95,17 +97,19 @@ module body(){
                translate([-18.5,-30,-24]) cube([1.5,45,31]);
                 
                // shaft bearing body
-               translate([-18.5,0,-0.5]) rotate([0,90,0]) cylinder(r=9.5, h=11.5, $fn=50); 
-               
+               translate([-18.5,(n/5)*20-20+0,-0.5]) rotate([0,90,0]) cylinder(r=9.5, h=11.5, $fn=50); 
+                
+               x=41;
+                
                // left hold together bearing housing
-               translate([-18.5,30,0]) rotate([0,90,0]) cylinder(r=11, h=14, $fn=50); 
-               translate([-18.5,-15,-9]) cube([14,45,16]);
-               translate([-18.5,-7,-24]) cube([14,45,24]);
+               translate([-18.5,(n/5)*x-x+30,0]) rotate([0,90,0]) cylinder(r=11, h=14, $fn=50); 
+               translate([-18.5,(n/5)*x-x-15,-9]) cube([14,45,16]);
+               translate([-18.5,(n/5)*x-x+-7,-24]) cube([14,45,24]);
                 
                // right hold together bearing housing
-               translate([(n/5)*r-r+66.5,30,0]) rotate([0,90,0]) cylinder(r=11, h=14, $fn=50); 
-               translate([(n/5)*r-r+66.5,15,-9]) cube([14,15,16]);
-               translate([(n/5)*r-r+66.5,-7,-24]) cube([14,45,24]);
+               translate([(n/5)*r-r+66.5,(n/5)*x-x+30,0]) rotate([0,90,0]) cylinder(r=11, h=14, $fn=50); 
+               translate([(n/5)*r-r+66.5,(n/5)*x-x-15,-9]) cube([14,15,16]);
+               translate([(n/5)*r-r+66.5,(n/5)*x-x-7,-24]) cube([14,45,24]);
                 
             }
 }
@@ -289,8 +293,8 @@ module pulley_body()
 }
 
 
-pulley_body();
+//pulley_body();
 //selector_screws_and_opening(71);
-//body();
+body();
 //front_PFTE_holder_tubes();
 //rear_PFTE_holder_tubes();
