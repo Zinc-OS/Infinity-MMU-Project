@@ -14,6 +14,7 @@ This repository contains SCAD files and STLs of the printed parts.
  * Build manual : https://manual.prusa3d.com/c/Original_Prusa_i3_MK3_to_Multi_Material_2_upgrade
  * Firmware : https://github.com/prusa3d/Prusa-Firmware
  * MMU2 control board: https://github.com/prusa3d/MM-control-2.0
+ * Useful: https://www.thingiverse.com/thing:3910546/files
 
 ##Image
 
