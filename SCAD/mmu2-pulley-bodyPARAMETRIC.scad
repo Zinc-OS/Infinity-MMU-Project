@@ -5,7 +5,7 @@
 // http://www.reprap.org/wiki/Prusa_Mendel
 // http://prusamendel.org
 
-EXTRUDERS=$t*10+4;
+EXTRUDERS=$t*10+5;
 n=EXTRUDERS;
 module front_PTFE()
 {
@@ -16,6 +16,28 @@ module front_PTFE()
         translate([3+(i*14),-15.5,4]) rotate([90,0,0]) cylinder(r1=2.2, r2=2.4, h=5, $fn=50); 
         translate([3+(i*14),0,4]) rotate([90,0,0]) cylinder(r=1.1, h=35, $fn=50); 
         translate([3+(i*14),-2,4]) rotate([90,0,0]) cylinder(r1=2,r2=1.1, h=5, $fn=50); 
+    }
+}
+module pulley_motor_screws_and_opening()
+{
+    x=86;
+    translate([(n/5)*x,0,0]){
+        translate([93-x,0,-0.5]) rotate([0,90,0]) cylinder(r=11.5, h=5, $fn=50); 
+        translate([80-x,0,7.5]) rotate([0,90,0]) cylinder(r=4, h=20, $fn=50); 
+        translate([91-x,-15.5,-15.5-0.5]) rotate([0,90,0]) cylinder(r=1.65, h=10, $fn=50); 
+        translate([91-x,15.5,-15.5-0.5]) rotate([0,90,0]) cylinder(r=1.65, h=10, $fn=50); 
+        translate([91-x,-15.5,15.5-0.5]) rotate([0,90,0]) cylinder(r=1.65, h=10, $fn=50); 
+        translate([91-x,15.5,15.5-0.5]) rotate([0,90,0]) cylinder(r=1.65, h=10, $fn=50); 
+        
+        translate([76-x,-15.5,-15.5-0.5]) rotate([0,90,0]) cylinder(r=3.1, h=15, $fn=50); 
+        translate([76-x,15.5,-15.5-0.5]) rotate([0,90,0]) cylinder(r=3.1, h=15, $fn=50); 
+        translate([81-x,-15.5,15.5-0.5]) rotate([0,90,0]) cylinder(r=3.1, h=10, $fn=50); 
+        translate([81-x,15.5,15.5-0.5]) rotate([0,90,0]) cylinder(r=3.1, h=10, $fn=50); 
+
+        translate([76-x,-15.5-3.1,-25-0.5]) cube([15,6.2,10]);
+        translate([76-x,15.5-3.1,-25-0.5]) cube([15,6.2,10]); 
+        translate([66-x,-15.5-1.5,-33-0.5]) rotate([0,-30,0]) cube([20,3,10]);
+        translate([66-x,15.5-1.5,-33-0.5]) rotate([0,-30,0]) cube([20,3,10]);
     }
 }
 module front_PFTE_holder_tubes()
@@ -29,19 +51,32 @@ module front_PFTE_holder_tubes()
                     translate([i-2.8+28,-18,-1.5-2.9]) cube([5.6,2,19]);
                 }
             }
-module rear_PTFE()
-{
-    for (i =[0:n-1])
+module grub_screws_space(){
+    // grub screws space
+    r=75;
+    for (i=[-6:14:r*(n/5)-r+50])
     {
-        translate([3+(i*14),15,4]) rotate([90,0,0]) cylinder(r=1.2, h=15, $fn=50); 
-        translate([3+(i*14),11.5,4]) rotate([90,0,0]) cylinder(r2=1.2, r1=1.5, h=3, $fn=50); 
-        translate([3+(i*14),15,4]) rotate([92,0,0]) cylinder(r1=1.1, r2=1.3, h=15, $fn=50); 
-        translate([3+(i*14),25,4]) rotate([90,0,0]) cylinder(r=2.05, h=15, $fn=50); 
-        translate([3+(i*14),17,4.25]) rotate([95,0,0]) cylinder(r=2.05, h=3, $fn=50); 
-        translate([3+(i*14),36.4,1.4]) rotate([80,0,0]) cylinder(r=2.05, h=15, $fn=50); 
-        translate([2+(i*14),4.5,4]) cube([2,4,10]); 
+        translate([i,0,0]) rotate([0,90,0]) cylinder(r=7, h=6, $fn=50); 
     }
 }
+
+
+module rear_PTFE()
+{
+    x=21;
+    for (i =[0:n-1])
+    {
+        translate([3+(i*14),(n/5)*x-x+15,4]) rotate([90,0,0]) cylinder(r=1.2, h=(n/5)*x-x+15, $fn=50); 
+        translate([3+(i*14),(n/5)*x-x+11.5,4]) rotate([90,0,0]) cylinder(r2=1.2, r1=1.5, h=3, $fn=50); 
+        translate([3+(i*14),(n/5)*x-x+15,4]) rotate([92,0,0]) cylinder(r1=1.1, r2=1.3, h=(n/5)*x-x+15, $fn=50); 
+        translate([3+(i*14),(n/5)*x-x+25,4]) rotate([90,0,0]) cylinder(r=2.05, h=(n/5)*x-x+15, $fn=50); 
+        translate([3+(i*14),(n/5)*x-x+17,4.25]) rotate([95,0,0]) cylinder(r=2.05, h=3, $fn=50); 
+        translate([3+(i*14),(n/5)*x-x+36.4,1.4]) rotate([80,0,0]) translate([0,0,-((n/5)*x-x+0)])cylinder(r=2.05, h=(n/5)*x-x+15, $fn=50); 
+        translate([2+(i*14),(n/5)*x-x+4.5,4]) cube([2,4,10]); 
+    }
+}
+
+
 module rear_PFTE_holder_tubes()
 {r=75;
     for (i=[9:14:r*(n/5)-r+52])
@@ -54,9 +89,28 @@ module rear_PFTE_holder_tubes()
                     translate([i,23.1,-5]) rotate([-20,0,0]) cylinder(r1=3.6, r2=3.1, h=3, $fn=6); 
                 }
     }
+module better_printing(){
+    // better printing
+        translate([0,-15,-25.75]) cube([15,15,1]);
+        translate([25,-15,-25.75]) cube([15,15,1]);
+        translate([-15,-37,-25.75]) cube([15,15,1]);
+        translate([-15,-58,-25.75]) cube([15,15,1]);
+        for (i=[5:20:65])
+        {
+            translate([i,-37,-25.75]) cube([15,15,1]);
+            translate([i,-58,-25.75]) cube([15,15,1]);
+        }
+}
+module hold_shafts_removal(){
+            // hold together shafts removal
+            r=86;
+            x=41;
+            translate([-15,(n/5)*x-x+30,0]) rotate([0,90,0]) cylinder(r=2, h=(n/5)*r-r+100, $fn=50);
+            translate([-2,(n/5)*x-x+28,0]) cube([(n/5)*r-r+65,4,10]);
+}
 
-
-module selector_screws_and_opening(x){
+module selector_screws_and_opening(){
+    x=86;
     translate([(n/5)*x,0,0]){
             translate([93-x,-48,-3]) rotate([0,90,0]) cylinder(r=11.5, h=5, $fn=50); 
             translate([93-x,-48,5]) rotate([0,90,0]) cylinder(r=4, h=5, $fn=50); 
@@ -73,6 +127,41 @@ module selector_screws_and_opening(x){
             translate([85-x,-48+10,-3]) rotate([0,90,0]) cylinder(r=4, h=5, $fn=50); 
             translate([85-x,-48-10,-7]) cube([5,20,8]); 
     }
+}
+module left_together_shaft_bearing(){
+        x=41;
+        // left hold together shaft bearing 
+        translate([-28.5,(n/5)*x-x+30,0]) rotate([0,90,0]) cylinder(r=13, h=10, $fn=50);
+        translate([-18.5,(n/5)*x-x+30,0]) rotate([0,90,0]) cylinder(r=8, h=5, $fn=50);
+        translate([-18.5,(n/5)*x-x+30,0]) rotate([0,90,0]) cylinder(r=6.5, h=6, $fn=50);
+        translate([-15,(n/5)*x-x+30,0]) rotate([0,90,0]) cylinder(r=2.8, h=6, $fn=50);
+        translate([-20,(n/5)*x-x+30,0]) rotate([0,90,0]) cylinder(r2=8, r1=8.5, h=3, $fn=50);
+        translate([-19.5,(n/5)*x-x+30,5]) rotate([0,90,0]) cylinder(r=4, h=6, $fn=50);
+}
+module right_together_shaft_bearing(){
+    // right hold together shaft bearing 
+    x=41;
+    r=86;
+    translate([(n/5)*r-r+80.5,(n/5)*x-x+30,0]) rotate([0,90,0]) cylinder(r=13, h=12, $fn=50);
+    translate([(n/5)*r-r+75.5,(n/5)*x-x+30,0]) rotate([0,90,0]) cylinder(r=8, h=6, $fn=50);
+    translate([(n/5)*r-r+74.5,(n/5)*x-x+30,0]) rotate([0,90,0]) cylinder(r=6.5, h=6, $fn=50);
+    translate([(n/5)*r-r+71.5,(n/5)*x-x+30,0]) rotate([0,90,0]) cylinder(r=2.8, h=6, $fn=50);
+    translate([(n/5)*r-r+79,(n/5)*x-x+30,0]) rotate([0,90,0]) cylinder(r1=8, r2=8.5, h=3, $fn=50);
+    translate([(n/5)*r-r+80.5,(n/5)*x-x+19.5,30]) rotate([0,90,0]) cube([30,30,12]);
+    translate([(n/5)*r-r+75.5,(n/5)*x-x+30,5]) rotate([0,90,0]) cylinder(r=4, h=6, $fn=50);
+}
+module selector_shafts(){
+    // selector shafts
+    r=86;
+    translate([-28,-48,-3]) rotate([0,90,0]) cylinder(r=4.3, h=(n/5)*r-r+130, $fn=50); 
+    translate([-26,-48,16]) rotate([0,90,0]) cylinder(r=2.7, h=(n/5)*r-r+130, $fn=50); 
+    translate([-26,-48,-19]) rotate([0,90,0]) cylinder(r=2.6, h=(n/5)*r-r+130, $fn=50); 
+    translate([-19,-48,16]) rotate([0,90,0]) cylinder(r1=2.65, r2=3,h=3, $fn=50); 
+    translate([-19,-48,-19]) rotate([0,90,0]) cylinder(r1=2.6, r2=3, h=3, $fn=50); 
+    translate([(n/5)*r-r+94,-48,16]) rotate([0,90,0]) cylinder(r1=2.65, r2=3,h=3, $fn=50); 
+    translate([(n/5)*r-r+94,-48,-19]) rotate([0,90,0]) cylinder(r1=2.6, r2=3, h=3, $fn=50); 
+    translate([-30,-48,16]) rotate([0,90,0]) cylinder(r=1.5, h=15, $fn=50); 
+    translate([-30,-48,-19]) rotate([0,90,0]) cylinder(r=1.5, h=15, $fn=50);
 }
 module body(){
     // body
@@ -113,6 +202,22 @@ module body(){
                 
             }
 }
+module rear_PFTE_tubes_holder(){
+    r=86;
+    x=41;
+    // rear PTFE tubes holder
+    translate([-2,(n/5)*x-x+15,4]) cube([(n/5)*r-r+65,30,10]);
+    translate([-2,(n/5)*x-x+15,5]) rotate([-10,0,0]) cube([(n/5)*r-r+65,30,10]);
+}
+module pulley_space(){
+    x=21;
+    r=86;
+    // pulley space
+    translate([-7,0,0]) rotate([0,90,0]) cylinder(r=5, h=(n/5)*r-r+71, $fn=50); 
+    translate([-7,(n/5)*x-x+-5,0]) cube([71,10,10]);
+    translate([-7,(n/5)*x-x+0,(n/5)*24.5]) rotate([0,90,0]) cylinder(r=(n/5)*21, h=(n/5)*r-r+71, $fn=50);     
+
+}
 module pulley_body()
 {
 
@@ -121,36 +226,15 @@ module pulley_body()
             body();
 
             // left hold together shaft bearing 
-            translate([-28.5,30,0]) rotate([0,90,0]) cylinder(r=13, h=10, $fn=50);
-            translate([-18.5,30,0]) rotate([0,90,0]) cylinder(r=8, h=5, $fn=50);
-            translate([-18.5,30,0]) rotate([0,90,0]) cylinder(r=6.5, h=6, $fn=50);
-            translate([-15,30,0]) rotate([0,90,0]) cylinder(r=2.8, h=6, $fn=50);
-            translate([-20,30,0]) rotate([0,90,0]) cylinder(r2=8, r1=8.5, h=3, $fn=50);
-            translate([-19.5,30,5]) rotate([0,90,0]) cylinder(r=4, h=6, $fn=50);
+            left_together_shaft_bearing();
             
             // right hold together shaft bearing 
-            translate([(n/5)*80.5,30,0]) rotate([0,90,0]) cylinder(r=13, h=12, $fn=50);
-            translate([(n/5)*75.5,30,0]) rotate([0,90,0]) cylinder(r=8, h=6, $fn=50);
-            translate([(n/5)*74.5,30,0]) rotate([0,90,0]) cylinder(r=6.5, h=6, $fn=50);
-            translate([(n/5)*71.5,30,0]) rotate([0,90,0]) cylinder(r=2.8, h=6, $fn=50);
-            translate([(n/5)*79,30,0]) rotate([0,90,0]) cylinder(r1=8, r2=8.5, h=3, $fn=50);
-            translate([(n/5)*80.5,19.5,30]) rotate([0,90,0]) cube([30,30,12]);
-            translate([(n/5)*75.5,30,5]) rotate([0,90,0]) cylinder(r=4, h=6, $fn=50);
+            right_together_shaft_bearing();
 
             // hold together shafts removal
-            translate([-15,30,0]) rotate([0,90,0]) cylinder(r=2, h=100, $fn=50);
-            translate([-2,28,0]) cube([65,4,10]);
+             hold_shafts_removal();
             
-            // selector shafts
-            translate([-28,-48,-3]) rotate([0,90,0]) cylinder(r=4.3, h=(n/5)*130, $fn=50); 
-            translate([-26,-48,16]) rotate([0,90,0]) cylinder(r=2.7, h=(n/5)*130, $fn=50); 
-            translate([-26,-48,-19]) rotate([0,90,0]) cylinder(r=2.6, h=(n/5)*130, $fn=50); 
-            translate([-19,-48,16]) rotate([0,90,0]) cylinder(r1=2.65, r2=3,h=3, $fn=50); 
-            translate([-19,-48,-19]) rotate([0,90,0]) cylinder(r1=2.6, r2=3, h=3, $fn=50); 
-            translate([(n/5)*94,-48,16]) rotate([0,90,0]) cylinder(r1=2.65, r2=3,h=3, $fn=50); 
-            translate([(n/5)*94,-48,-19]) rotate([0,90,0]) cylinder(r1=2.6, r2=3, h=3, $fn=50); 
-            translate([-30,-48,16]) rotate([0,90,0]) cylinder(r=1.5, h=15, $fn=50); 
-            translate([-30,-48,-19]) rotate([0,90,0]) cylinder(r=1.5, h=15, $fn=50); 
+             selector_shafts();
                         
             
             // PTFE tubes
@@ -158,19 +242,13 @@ module pulley_body()
             rear_PTFE();
             
             // rear PTFE tubes holder
-            translate([-2,15,4]) cube([65,30,10]);
-            translate([-2,15,5]) rotate([-10,0,0]) cube([65,30,10]);
+            rear_PFTE_tubes_holder();
             
             // pulley space
-            translate([-7,0,0]) rotate([0,90,0]) cylinder(r=5, h=(n/5)*71, $fn=50); 
-            translate([-7,-5,0]) cube([71,10,10]);
-            translate([-7,0,24.5]) rotate([0,90,0]) cylinder(r=21, h=(n/5)*71, $fn=50);     
+            pulley_space();
 
             // grub screws space
-            for (i =[-6:14:50])
-            {
-                translate([i,0,0]) rotate([0,90,0]) cylinder(r=7, h=6, $fn=50); 
-            }
+            grub_screws_space();
             
             // coupling space
             translate([63.9,0,-0.5]) rotate([0,90,0]) cylinder(r=11.5, h=32, $fn=50); 
@@ -229,26 +307,11 @@ module pulley_body()
             translate([(n/5)*91-1.8,-27-2.8,14.4]) cube([1.8*2,5.6,2.1]);
             
             // pulley motor screws and opening
-            translate([93,0,-0.5]) rotate([0,90,0]) cylinder(r=11.5, h=5, $fn=50); 
-            translate([80,0,7.5]) rotate([0,90,0]) cylinder(r=4, h=20, $fn=50); 
-            translate([91,-15.5,-15.5-0.5]) rotate([0,90,0]) cylinder(r=1.65, h=10, $fn=50); 
-            translate([91,15.5,-15.5-0.5]) rotate([0,90,0]) cylinder(r=1.65, h=10, $fn=50); 
-            translate([91,-15.5,15.5-0.5]) rotate([0,90,0]) cylinder(r=1.65, h=10, $fn=50); 
-            translate([91,15.5,15.5-0.5]) rotate([0,90,0]) cylinder(r=1.65, h=10, $fn=50); 
-            
-            translate([76,-15.5,-15.5-0.5]) rotate([0,90,0]) cylinder(r=3.1, h=15, $fn=50); 
-            translate([76,15.5,-15.5-0.5]) rotate([0,90,0]) cylinder(r=3.1, h=15, $fn=50); 
-            translate([81,-15.5,15.5-0.5]) rotate([0,90,0]) cylinder(r=3.1, h=10, $fn=50); 
-            translate([81,15.5,15.5-0.5]) rotate([0,90,0]) cylinder(r=3.1, h=10, $fn=50); 
-
-            translate([76,-15.5-3.1,-25-0.5]) cube([15,6.2,10]);
-            translate([76,15.5-3.1,-25-0.5]) cube([15,6.2,10]); 
-            translate([66,-15.5-1.5,-33-0.5]) rotate([0,-30,0]) cube([20,3,10]);
-            translate([66,15.5-1.5,-33-0.5]) rotate([0,-30,0]) cube([20,3,10]);
+            pulley_motor_screws_and_opening();
             
 
             // selector motor screws and opening
-            selector_screws_and_opening(71);
+            selector_screws_and_opening();
             
             
             // frame holders
@@ -275,15 +338,7 @@ module pulley_body()
             translate([-30,-70,7.1]) rotate([40,0,0]) cube([20,30,10]);
             
             // better printing
-            translate([0,-15,-25.75]) cube([15,15,1]);
-            translate([25,-15,-25.75]) cube([15,15,1]);
-            translate([-15,-37,-25.75]) cube([15,15,1]);
-            translate([-15,-58,-25.75]) cube([15,15,1]);
-            for (i=[5:20:65])
-            {
-            translate([i,-37,-25.75]) cube([15,15,1]);
-            translate([i,-58,-25.75]) cube([15,15,1]);
-            }
+            better_printing();
 
             //version
             translate([-14,-5.5,-24.4]) rotate([0,180,180]) linear_extrude(height = 0.8) 
@@ -294,7 +349,24 @@ module pulley_body()
 
 
 //pulley_body();
-//selector_screws_and_opening(71);
+color("black",alpha=0.3){
+    front_PTFE();
+    rear_PTFE();
+    selector_screws_and_opening();
+    front_PFTE_holder_tubes();
+    rear_PFTE_holder_tubes();
+    better_printing();
+    pulley_motor_screws_and_opening();
+    left_together_shaft_bearing();
+    right_together_shaft_bearing();
+    grub_screws_space();
+    hold_shafts_removal();
+    selector_shafts();
+    rear_PFTE_tubes_holder();
+    pulley_space();
+}
+rear_PTFE();
+color("orange",alpha=0.5)
 body();
-//front_PFTE_holder_tubes();
-//rear_PFTE_holder_tubes();
+
+
